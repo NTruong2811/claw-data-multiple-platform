@@ -16,6 +16,7 @@ async function downloadDouyin(url, basePath = 'resultdownload_preniv') {
       }
     });
 
+
     if (!data || !data.status) {
       spinner.fail(chalk.red(' Failed to fetch Douyin video data'));
       console.log(chalk.gray('   • The API returned an error or invalid response'));

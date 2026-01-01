@@ -15,6 +15,9 @@ async function downloadRedNote(url, basePath = 'resultdownload_preniv') {
       }
     });
 
+    console.log(data);
+    console.log(data.data.videoLinks);
+
     if (!data || !data.status || data.status !== 200) {
       spinner.fail(chalk.red(' Failed to fetch RedNote media data'));
       console.log(chalk.gray('   • The API returned an error or invalid response'));
