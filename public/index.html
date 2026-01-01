@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PRENIVDL - Universal Social Media Downloader. Download videos, images, audio from TikTok, Instagram, YouTube, Twitter/X, Facebook, Spotify, RedNote, and more.">
-  <title>PRENIVDL - Universal Social Media Downloader</title>
+  <meta name="description"
+    content="NTRUONG - Universal Social Media Downloader. Download videos, images, audio from TikTok, Instagram, YouTube, Twitter/X, Facebook, Spotify, RedNote, and more.">
+  <title>NTRUONG - Universal Social Media Downloader</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <!-- Background Effects -->
   <div class="bg-gradient"></div>
@@ -21,20 +25,20 @@
     <header class="header">
       <div class="logo">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="10" fill="url(#gradient)"/>
-          <path d="M20 10L24 18H16L20 10Z" fill="white" opacity="0.9"/>
-          <path d="M20 30L16 22H24L20 30Z" fill="white" opacity="0.9"/>
-          <circle cx="20" cy="20" r="3" fill="white"/>
+          <rect width="40" height="40" rx="10" fill="url(#gradient)" />
+          <path d="M20 10L24 18H16L20 10Z" fill="white" opacity="0.9" />
+          <path d="M20 30L16 22H24L20 30Z" fill="white" opacity="0.9" />
+          <circle cx="20" cy="20" r="3" fill="white" />
           <defs>
             <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
-              <stop offset="0%" stop-color="#00d4ff"/>
-              <stop offset="100%" stop-color="#9d00ff"/>
+              <stop offset="0%" stop-color="#00d4ff" />
+              <stop offset="100%" stop-color="#9d00ff" />
             </linearGradient>
           </defs>
         </svg>
-        <h1>PRENIVDL</h1>
+        <h1>NTRUONG</h1>
       </div>
-      <p class="tagline">Universal Social Media Downloader</p>
+      <p class="tagline">Tải Video & Hình Ảnh Mạng Xã Hội</p>
     </header>
 
     <!-- Main Content -->
@@ -42,28 +46,26 @@
       <!-- Input Section -->
       <section class="input-section">
         <div class="card input-card">
-          <h2>Download Media</h2>
-          <p class="description">Paste your URL from any supported platform</p>
-          
+          <h2>Tải Xuống Media</h2>
+          <p class="description">Dán link từ bất kỳ nền tảng nào được hỗ trợ</p>
+
           <form id="downloadForm" class="download-form">
             <div class="input-wrapper">
               <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M10 6V14M6 10H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path
+                  d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z"
+                  stroke="currentColor" stroke-width="2" />
+                <path d="M10 6V14M6 10H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
               </svg>
-              <input 
-                type="text" 
-                id="urlInput" 
-                placeholder="https://www.tiktok.com/@username/video/..." 
-                class="url-input"
-                required
-              />
+              <input type="text" id="urlInput" placeholder="https://www.tiktok.com/@username/video/..."
+                class="url-input" required />
             </div>
             <button type="submit" class="btn-primary" id="downloadBtn">
-              <span class="btn-text">Download</span>
+              <span class="btn-text">Tải Xuống</span>
               <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 3V13M10 13L6 9M10 13L14 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3 17H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10 3V13M10 13L6 9M10 13L14 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M3 17H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
               </svg>
             </button>
           </form>
@@ -72,7 +74,7 @@
           <div id="platformDetection" class="platform-detection" style="display: none;">
             <div class="platform-badge">
               <span class="badge-icon">🎯</span>
-              <span class="badge-text" id="detectedPlatform">Detecting platform...</span>
+              <span class="badge-text" id="detectedPlatform">Đang nhận diện nền tảng...</span>
             </div>
           </div>
         </div>
@@ -81,14 +83,14 @@
       <!-- Loading State -->
       <div id="loadingState" class="loading-state" style="display: none;">
         <div class="spinner"></div>
-        <p>Fetching media data...</p>
+        <p>Đang tải dữ liệu media...</p>
       </div>
 
       <!-- Error State -->
       <div id="errorState" class="error-state" style="display: none;">
         <div class="error-icon">⚠️</div>
-        <h3 id="errorTitle">Error</h3>
-        <p id="errorMessage">Something went wrong. Please try again.</p>
+        <h3 id="errorTitle">Lỗi</h3>
+        <p id="errorMessage">Có lỗi xảy ra. Vui lòng thử lại.</p>
       </div>
 
       <!-- Results Section -->
@@ -98,7 +100,7 @@
           <div class="media-info">
             <div id="mediaThumbnail" class="media-thumbnail"></div>
             <div class="media-details">
-              <h3 id="mediaTitle">Media Title</h3>
+              <h3 id="mediaTitle">Tiêu đề Media</h3>
               <p id="mediaAuthor" class="media-author"></p>
               <div id="mediaMetadata" class="media-metadata"></div>
             </div>
@@ -106,7 +108,7 @@
 
           <!-- Download Options -->
           <div class="download-options">
-            <h4>Download Options</h4>
+            <h4>Tùy Chọn Tải Xuống</h4>
             <div id="downloadChoices" class="download-choices"></div>
           </div>
         </div>
@@ -115,7 +117,7 @@
       <!-- Supported Platforms -->
       <section class="platforms-section">
         <div class="card platforms-card">
-          <h3>Supported Platforms</h3>
+          <h3>Nền Tảng Được Hỗ Trợ</h3>
           <div id="platformsList" class="platforms-grid">
             <div class="platform-skeleton"></div>
             <div class="platform-skeleton"></div>
@@ -128,15 +130,16 @@
     <!-- Footer -->
     <footer class="footer">
       <p>
-        Made with <span class="heart">❤️</span> by 
-        <a href="https://github.com/arsya371/prenivdlapp-cli" target="_blank" rel="noopener">PrenivApp</a>
+        Được tạo với <span class="heart">❤️</span> bởi
+        <a href="#" target="_blank" rel="noopener">NTRUONG</a>
       </p>
       <p class="footer-note">
-        For educational purposes only. Respect platform terms of service.
+        Chỉ dành cho mục đích học tập. Vui lòng tôn trọng điều khoản sử dụng của các nền tảng.
       </p>
     </footer>
   </div>
 
   <script src="app.js"></script>
 </body>
+
 </html>

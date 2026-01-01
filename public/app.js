@@ -1,5 +1,5 @@
 // ============================================
-// PRENIVDL Web App - Client JavaScript
+// NTRUONG Web App - Client JavaScript
 // ============================================
 
 const API_BASE = window.location.origin;
@@ -57,7 +57,7 @@ function handleUrlInput(e) {
     const platform = detectPlatform(urlObj.hostname);
     
     if (platform) {
-      detectedPlatform.textContent = `Platform: ${platform.name}`;
+      detectedPlatform.textContent = `Nền tảng: ${platform.name}`;
       platformDetection.style.display = 'block';
     } else {
       platformDetection.style.display = 'none';
@@ -87,7 +87,7 @@ async function handleDownload(e) {
   const url = urlInput.value.trim();
   
   if (!url) {
-    showError('Invalid Input', 'Please enter a valid URL');
+    showError('Đầu vào không hợp lệ', 'Vui lòng nhập URL hợp lệ');
     return;
   }
 
@@ -95,7 +95,7 @@ async function handleDownload(e) {
   try {
     new URL(url);
   } catch (error) {
-    showError('Invalid URL', 'Please enter a valid URL format');
+    showError('URL không hợp lệ', 'Vui lòng nhập định dạng URL hợp lệ');
     return;
   }
 
@@ -131,7 +131,7 @@ async function handleDownload(e) {
 
   } catch (error) {
     console.error('Download error:', error);
-    showError('Download Failed', error.message);
+    showError('Tải xuống thất bại', error.message);
   } finally {
     loadingState.style.display = 'none';
     downloadBtn.disabled = false;
@@ -148,11 +148,11 @@ function displayResults(data) {
   const { platform, data: mediaData } = data;
 
   // Set title
-  mediaTitle.textContent = mediaData.title || 'Untitled';
+  mediaTitle.textContent = mediaData.title || 'Không có tiêu đề';
 
   // Set author
   if (mediaData.author) {
-    mediaAuthor.textContent = `By ${mediaData.author}`;
+    mediaAuthor.textContent = `Bởi ${mediaData.author}`;
     mediaAuthor.style.display = 'block';
   } else {
     mediaAuthor.style.display = 'none';
@@ -209,7 +209,7 @@ function displayMetadata(metadata, platform) {
 
 function buildDownloadChoices(downloads, platform) {
   if (!downloads) {
-    downloadChoices.innerHTML = '<p style="color: var(--color-text-muted);">No download options available</p>';
+    downloadChoices.innerHTML = '<p style="color: var(--color-text-muted);">Không có tùy chọn tải xuống</p>';
     return;
   }
 
@@ -283,7 +283,7 @@ function buildDownloadChoices(downloads, platform) {
 
   // Render choices
   if (choices.length === 0) {
-    downloadChoices.innerHTML = '<p style="color: var(--color-text-muted);">No download options available</p>';
+    downloadChoices.innerHTML = '<p style="color: var(--color-text-muted);">Không có tùy chọn tải xuống</p>';
     return;
   }
 
@@ -294,7 +294,7 @@ function buildDownloadChoices(downloads, platform) {
         ${choice.label}
       </span>
       <button class="choice-download-btn" onclick="downloadMedia('${encodeURIComponent(choice.url)}', '${choice.label}', '${choice.type}')">
-        Download
+        Tải xuống
       </button>
     </div>
   `).join('');
@@ -332,7 +332,7 @@ function downloadMedia(encodedUrl, label, type) {
   document.body.removeChild(link);
 
   // Show feedback
-  showToast(`Downloading ${label}...`);
+  showToast(`Đang tải xuống ${label}...`);
 }
 
 function sanitizeFilename(filename) {
@@ -376,13 +376,26 @@ function displayPlatforms(platforms) {
     'Weibo': '💬'
   };
 
-  platformsList.innerHTML = platforms.map(platform => `
-    <div class="platform-item">
-      <div class="platform-icon">${platformIcons[platform.name] || '📱'}</div>
-      <div class="platform-name">${platform.name}</div>
-      <div class="platform-type">${platform.mediaType}</div>
-    </div>
-  `).join('');
+  // Only these platforms are currently working
+  const activePlatforms = ['Instagram', 'Douyin'];
+
+  platformsList.innerHTML = platforms.map(platform => {
+    const isActive = activePlatforms.includes(platform.name);
+    const statusBadge = isActive 
+      ? '<span class="status-badge status-active">✓ Hoạt động</span>' 
+      : '<span class="status-badge status-disabled">Sắp ra mắt</span>';
+    
+    return `
+      <div class="platform-item ${isActive ? '' : 'platform-disabled'}">
+        <div class="platform-icon">${platformIcons[platform.name] || '📱'}</div>
+        <div class="platform-info">
+          <div class="platform-name">${platform.name}</div>
+          <div class="platform-type">${platform.mediaType}</div>
+        </div>
+        ${statusBadge}
+      </div>
+    `;
+  }).join('');
 }
 
 // ============================================
