@@ -362,28 +362,25 @@ function displayPlatforms(platforms) {
     'TikTok': '🎵',
     'Facebook': '📘',
     'Instagram': '📷',
-    'Twitter': '🐦',
+    'Twitter/X': '✖️',
     'YouTube': '▶️',
     'Douyin': '🎶',
     'Spotify': '🎧',
     'Pinterest': '📌',
-    'Apple Music': '🎵',
     'CapCut': '✂️',
-    'Bluesky': '🦋',
     'RedNote/Xiaohongshu': '📕',
     'Threads': '🧵',
-    'Kuaishou': '⚡',
     'Weibo': '💬'
   };
 
   // Only these platforms are currently working
-  const activePlatforms = ['Instagram', 'Douyin'];
+  const activePlatforms = ['Instagram', 'Douyin', 'TikTok', 'Facebook', 'Twitter/X', 'RedNote/Xiaohongshu'];
 
   platformsList.innerHTML = platforms.map(platform => {
     const isActive = activePlatforms.includes(platform.name);
     const statusBadge = isActive 
       ? '<span class="status-badge status-active">✓ Hoạt động</span>' 
-      : '<span class="status-badge status-disabled">Sắp ra mắt</span>';
+      : '<span class="status-badge status-disabled">Đang phát triển</span>';
     
     return `
       <div class="platform-item ${isActive ? '' : 'platform-disabled'}">

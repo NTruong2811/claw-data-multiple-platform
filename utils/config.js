@@ -5,13 +5,10 @@ const { downloadTwitter } = require('../routes/twitter');
 const { downloadDouyin } = require('../routes/douyin');
 const { downloadSpotify } = require('../routes/spotify');
 const { downloadPinterest } = require('../routes/pinterest');
-const { downloadAppleMusic } = require('../routes/applemusic');
 const { downloadYouTube } = require('../routes/youtube');
 const { downloadCapcut } = require('../routes/capcut');
-const { downloadBluesky } = require('../routes/bluesky');
 const { downloadRedNote } = require('../routes/rednote');
 const { downloadThreads } = require('../routes/threads');
-const { downloadKuaishou } = require('../routes/kuaishou');
 const { downloadWeibo } = require('../routes/weibo');
 
 const PLATFORM_CONFIG = [
@@ -42,13 +39,13 @@ const PLATFORM_CONFIG = [
     exampleUrl: 'https://www.instagram.com/p/ABC123/'
   },
   {
-    name: 'Twitter',
+    name: 'Twitter/X',
     command: 'twitter',
     alias: 'tw',
     domains: ['twitter.com', 'x.com'],
     mediaType: 'video',
     handler: downloadTwitter,
-    exampleUrl: 'https://twitter.com/user/status/1234567890'
+    exampleUrl: 'https://twitter.com/user/status/1234567890 or https://x.com/user/status/1234567890'
   },
   {
     name: 'Douyin',
@@ -77,16 +74,7 @@ const PLATFORM_CONFIG = [
     handler: downloadPinterest,
     exampleUrl: 'https://www.pinterest.com/pin/1234567890/'
   },
-  {
-    name: 'Apple Music',
-    command: 'applemusic',
-    alias: 'am',
-    domains: ['music.apple.com'],
-    mediaType: 'track',
-    handler: downloadAppleMusic,
-    customMatch: (hostname, url) => hostname.includes('apple.com') && url.includes('music.apple.com'),
-    exampleUrl: 'https://music.apple.com/id/album/song/123456'
-  },
+
   {
     name: 'YouTube',
     command: 'youtube',
@@ -105,15 +93,7 @@ const PLATFORM_CONFIG = [
     handler: downloadCapcut,
     exampleUrl: 'https://www.capcut.com/tv2/ABC123/'
   },
-  {
-    name: 'Bluesky',
-    command: 'bluesky',
-    alias: 'bsky',
-    domains: ['bsky.app', 'bsky.social'],
-    mediaType: 'post',
-    handler: downloadBluesky,
-    exampleUrl: 'https://bsky.app/profile/user.bsky.social/post/ABC123'
-  },
+
   {
     name: 'RedNote/Xiaohongshu',
     command: 'rednote',
@@ -131,15 +111,7 @@ const PLATFORM_CONFIG = [
     handler: downloadThreads,
     exampleUrl: 'https://www.threads.net/@username/post/ABC123'
   },
-  {
-    name: 'Kuaishou',
-    command: 'kuaishou',
-    alias: 'ks',
-    domains: ['kuaishou.com', 'ksurl.cn'],
-    mediaType: 'media',
-    handler: downloadKuaishou,
-    exampleUrl: 'https://www.kuaishou.com/short-video/ABC123'
-  },
+
   {
     name: 'Weibo',
     command: 'weibo',
