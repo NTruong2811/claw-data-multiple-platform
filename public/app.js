@@ -78,18 +78,64 @@ function detectPlatform(hostname) {
 }
 
 // ============================================
+// URL Cleaning & Extraction
+// ============================================
+
+function cleanUrl(input) {
+  // Extract URL from text (especially for RedNote/Xiaohongshu share format)
+  const urlMatch = input.match(/(https?:\/\/[^\s]+)/);
+  
+  if (!urlMatch) {
+    return input; // Return as-is if no URL found
+  }
+  
+  let url = urlMatch[0];
+  
+  // Remove trailing punctuation that might be captured
+  url = url.replace(/[。，、；：！？》）】]+$/, '');
+  
+  try {
+    const urlObj = new URL(url);
+    
+    // For Xiaohongshu/RedNote, remove tracking parameters
+    if (urlObj.hostname.includes('xiaohongshu.com')) {
+      // Keep only the essential part of the URL
+      const params = new URLSearchParams(urlObj.search);
+      
+      // Rebuild URL without tracking params
+      urlObj.search = params.toString();
+      
+      return urlObj.toString();
+    }
+    
+    // For other platforms, return cleaned URL
+    return urlObj.toString();
+    
+  } catch (error) {
+    // If URL parsing fails, return the extracted URL
+    return url;
+  }
+}
+
+// ============================================
 // Download Handler
 // ============================================
 
 async function handleDownload(e) {
   e.preventDefault();
   
-  const url = urlInput.value.trim();
+  let url = urlInput.value.trim();
   
   if (!url) {
     showError('Đầu vào không hợp lệ', 'Vui lòng nhập URL hợp lệ');
     return;
   }
+
+  // Clean URL (extract from text and remove tracking params)
+  url = cleanUrl(url);
+
+  // Update input field with cleaned URL
+  urlInput.value = url;
 
   // Validate URL format
   try {
