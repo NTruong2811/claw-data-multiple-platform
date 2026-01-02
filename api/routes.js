@@ -1,6 +1,7 @@
 const express = require('express');
 const { PLATFORM_CONFIG, matchPlatform } = require('../utils/config');
 const { fetchPlatformData } = require('./handlers');
+const { proxyDownload } = require('./proxy');
 
 // Import individual route handlers from old routes for reference
 // Note: These are CLI-based handlers with interactive prompts, 
@@ -22,6 +23,12 @@ const { downloadWeibo } = require('../routes/weibo');
 const { downloadYouTube } = require('../routes/youtube');
 
 const router = express.Router();
+
+/**
+ * GET /api/proxy-download
+ * Proxy download endpoint - streams file from external CDN
+ */
+router.get('/proxy-download', proxyDownload);
 
 /**
  * GET /api/platforms

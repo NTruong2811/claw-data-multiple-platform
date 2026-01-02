@@ -319,12 +319,27 @@ function getIconForType(type) {
 function downloadMedia(encodedUrl, label, type) {
   const url = decodeURIComponent(encodedUrl);
   
-  // Create a temporary link and trigger download
+  // Determine file extension
+  let extension = '';
+  if (type === 'video') {
+    extension = '.mp4';
+  } else if (type === 'audio') {
+    extension = '.mp3';
+  } else if (type === 'image') {
+    extension = '.jpg';
+  }
+  
+  // Create filename
+  const filename = `${sanitizeFilename(label)}_${Date.now()}${extension}`;
+  
+  // Use proxy endpoint to download
+  const proxyUrl = `${API_BASE}/api/proxy-download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`;
+  
+  // Create download link
   const link = document.createElement('a');
-  link.href = url;
-  link.download = `${sanitizeFilename(label)}_${Date.now()}`;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
+  link.href = proxyUrl;
+  link.download = filename;
+  link.style.display = 'none';
   
   // Trigger download
   document.body.appendChild(link);
